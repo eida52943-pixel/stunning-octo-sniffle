@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Request an appointment with a Hope Hospital department.">
+    <title>Appointments | Hope Hospital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html" aria-label="Hope Hospital home">
+                <img class="brand-logo" src="canva-hospital-building-MADBhO06T9A.webp" alt=""><span>Hope Hospital</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="about.html">About</a>
+                <a href="departments.html">Departments</a>
+                <a href="doctors.html">Our doctors</a>
+                <a class="nav-button" href="appointment.html" aria-current="page">Book a visit</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="section">
+            <div class="container appointment-layout">
+                <div>
+                    <p class="eyebrow">We're here to help</p>
+                    <h1>Request an appointment</h1>
+                    <p>Choose the department that best fits your needs. Our team will follow up to arrange your visit.</p>
+                    <p class="contact-line"><strong>Phone:</strong> <a href="tel:19000">19000</a></p>
+                    <p class="contact-line"><strong>Location:</strong> Cairo, Egypt</p>
+                    <p class="contact-line"><strong>Email:</strong> <a href="mailto:info@hospital.com">info@hospital.com</a></p>
+                </div>
+                <form class="booking-form" id="booking-form">
+                    <label for="patient-name">Full name</label>
+                    <input id="patient-name" name="name" type="text" autocomplete="name" required>
+                    <label for="patient-phone">Phone number</label>
+                    <input id="patient-phone" name="phone" type="tel" autocomplete="tel" required>
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="">Choose a department</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Neurology">Neurology</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                    </select>
+                    <label for="preferred-date">Preferred date</label>
+                    <input id="preferred-date" name="date" type="date">
+                    <button class="btn btn-primary" type="submit">Send request</button>
+                    <p class="form-note" id="form-status" role="status">Demo form: your information stays on this device and is not sent.</p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand" href="index.html"><img class="brand-logo" src="canva-hospital-building-MADBhO06T9A.webp" alt=""><span>Hope Hospital</span></a>
+            <p>Quality care, delivered with compassion.</p>
+            <a href="mailto:info@hospital.com">info@hospital.com</a>
+        </div>
+    </footer>
+    <script>
+        const appointmentParams = new URLSearchParams(window.location.search);
+        const requestedDepartment = appointmentParams.get("department");
+        const departmentSelect = document.getElementById("department");
+        if (requestedDepartment && Array.from(departmentSelect.options).some((option) => option.value === requestedDepartment)) {
+            departmentSelect.value = requestedDepartment;
+        }
+
+        document.getElementById("booking-form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            document.getElementById("form-status").textContent =
+                "Thank you. This demo form does not send or store appointment requests. Please call 19000 to book.";
+        });
+    </script>
+</body>
+</html>
